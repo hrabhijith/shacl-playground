@@ -55,9 +55,6 @@ jsonld_data = '''
 }
 '''
 
-# Load the data graph
-g = Graph()
-
 # Convert JSON-LD to SHACL TTL
 shacl_ttl = jsonld_to_shacl(jsonld_data)
 
@@ -65,6 +62,8 @@ shacl_ttl = jsonld_to_shacl(jsonld_data)
 with open('output.ttl', 'w') as file:
     file.write(shacl_ttl)
 
+# Load the data graph
+g = Graph()
 g.parse("./output.ttl", format="turtle")
 
 
