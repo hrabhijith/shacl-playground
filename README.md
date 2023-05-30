@@ -17,3 +17,7 @@ Operations perfromed in 'rdf.py' are listed as follows.
 5. The "query_template" variable containing SparQL query is also executed on JSON-LD.
 6. The "results" variable shows the errors if "conforms" is false.
 
+To test,
+
+Change the value of "strength" property in JSON-LD inside "rdf.py" file to above 1.0 (eg, 1.1). And then, run the rdf.py. An error with details must be shown.
+
