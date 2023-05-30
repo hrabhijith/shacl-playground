@@ -7,5 +7,5 @@
         [ a ngsi-ld:Property ;
             ngsi-ld:hasValue ns1:state_ON ] ;
     ns1:strength [ a ngsi-ld:Property ;
-            ngsi-ld:hasValue "0.9" ] .
+            ngsi-ld:hasValue "1.2" ] .
 

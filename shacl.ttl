@@ -29,6 +29,8 @@ iff:FilterShape
 
             sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
             sh:nodeKind sh:Literal;
+            sh:minInclusive 0.0 ;
+            sh:maxInclusive 1.0 ;
         ] ;
         sh:property [
             sh:path rdf:type ;
