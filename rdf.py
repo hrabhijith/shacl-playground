@@ -24,7 +24,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?strength
 WHERE {
   <urn:filter:1> iff:strength ?strength .
-  FILTER (?strength = "1")
+  FILTER (?strength = "0.9")
 }
 """
 
