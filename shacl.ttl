@@ -1,0 +1,38 @@
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iff: <https://industry-fusion.com/types/v0.9/> .
+PREFIX ex: <http://example.com/ns#>
+
+iff:FilterShape
+    a sh:NodeShape ;
+    sh:targetClass iff:filter ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/state> ;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:IRI;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/strength> ;
+        sh:nodeKind sh:BlankNode;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+.

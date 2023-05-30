@@ -1,0 +1,11 @@
+@prefix ngsi-ld: <https://uri.etsi.org/ngsi-ld/> .
+@prefix ns1: <https://industry-fusion.com/types/v0.9/> .
+
+<urn:filter:1> a ns1:filter ;
+    ns1:state [ a ngsi-ld:Property ;
+            ngsi-ld:hasValue ns1:state_ON ],
+        [ a ngsi-ld:Property ;
+            ngsi-ld:hasValue ns1:state_ON ] ;
+    ns1:strength [ a ngsi-ld:Property ;
+            ngsi-ld:hasValue "0.9" ] .
+
