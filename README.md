@@ -21,3 +21,5 @@ To test,
 
 Change the value of "strength" property in "jsonld_data" variable inside "rdf.py" file to above 1.0 (eg, 1.1). And then, run the rdf.py. An error with details must be shown.
 
+The above test must fail as the shape defined in "shacl.ttl" file specifies that the filter strength must be in 0.0 to 1.0 range.
+
