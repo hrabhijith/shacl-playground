@@ -6,7 +6,7 @@ RUN pip install -r requirements.txt
 
 COPY . . 
 
-ENV OPENAI_API_KEY=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  
+ENV OPENAI_API_KEY=<YOUR_API_KEY>
 
 WORKDIR /
 
