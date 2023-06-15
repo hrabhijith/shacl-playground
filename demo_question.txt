@@ -1,0 +1,26 @@
+Gas pressure/flow verification for cutting process
+
+Involved:
+ * IBEDA (Gerd Weissenfels)
+
+ * Kjellberg (?)
+
+ * MicroStep (?)
+
+Target:
+
+For the cutting process at CNC cutting machines a defined pressure as well as a given flow rate of gas (or different gases, depending on the process) has to be kept. To ensure that these parameters are met, the gas sampling point connected to the CNC cutting system is to be equipped with appropriate sensor technology and the values are to be documented.
+
+Kjellberg:
+
+Requires specific window 10 -12 bar at inlet. Input pressure is measured, output pressure is set and output.
+
+Would be interesting to know if enough gas is available before starting the cutting process.
+
+Gas consumption / flow:
+
+Gas consumption is determined in tests and transferred to database. During operation, the value is read from the database and set, but no longer measured.
+
+Pressure in cylinders:
+
+Highly compressed gases e.g. Ar corresponds to the high pressure of the filling.
