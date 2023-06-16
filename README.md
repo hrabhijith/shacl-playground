@@ -4,7 +4,7 @@
 
 `python3 chat.py`
 
-`export OPEN_API_KEY=<your api key>`
+`export OPENAI_API_KEY=<your api key>`
 
 In the input prompt enter your question. 
 
