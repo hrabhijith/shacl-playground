@@ -1,0 +1,6 @@
+Generate a SHACL rule or shape for iff namespace using the below goal. Consider CNC Cutting systems as subclass of iff machine main class.
+
+Goal:
+For the cutting process on CNC cutting systems, a defined pressure and a specified flow rate of gas (or various gases, depending on the process) must be maintained. In order to ensure that these parameters are adhered to, the gas extraction point, which is connected to the CNC cutting system, is to be equipped with appropriate sensors and the values are to be documented. This process requires specific window 10-12 bar at the entrance. Inlet pressure is measured, outlet pressure is set and output.
+It would be interesting to know whether enough gas is available before starting the cutting process.
+Highly compressed gases, e.g. Ar, correspond to the high pressure of the filling.

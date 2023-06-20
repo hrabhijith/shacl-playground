@@ -1,0 +1,1000 @@
+Question: 
+Give me the main RDF classes and subclasses for IFF namespace from knowledge turtle file .
+
+Answer: 
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX iff: <https://industry-fusion.com/types/v0.9/>
+PREFIX oee: <https://industry-fusion.com/oee/v0.9/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+iff:entity a iff:class ;
+    a rdfs:class .
+iff:machine a iff:class ; 
+    a rdfs:class .
+iff:filter rdfs:subClassOf iff:machine ;
+    a iff:class .
+iff:plasmacutter rdfs:subClassOf iff:cutter ;
+    a iff:class .
+iff:lasercutter rdfs:subClassOf iff:cutter;
+    a iff:class .
+iff:cutter rdfs:subClassOf iff:machine ;
+    a iff:class .
+iff:workpiece rdfs:subClassOf iff:entity ;
+    a iff:class .
+iff:filterCartridge rdfs:subClassOf iff:entity ;
+    a iff:class .
+iff:scheduleEntity a iff:class .
+iff:oeeTemplate rdfs:subClassOf iff:scheduleEntity .
+
+Question: 
+Give me the RDF machine state class and objects for IFF namespace from knowledge turtle file .
+
+Answer:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX iff: <https://industry-fusion.com/types/v0.9/>
+PREFIX oee: <https://industry-fusion.com/oee/v0.9/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+iff:machineState a rdfs:class .
+iff:state_OFF a iff:machineState .
+iff:state_OFF iff:stateValidFor iff:filter, iff:cutter .
+iff:state_ON a iff:machineState  .
+iff:state_ON iff:stateValidFor iff:filter, iff:cutter .
+iff:state_PREPARING a iff:machineState  .
+iff:state_PREPARING iff:stateValidFor iff:cutter .
+iff:state_PROCESSING a iff:machineState  .
+iff:state_PROCESSING iff:stateValidFor iff:cutter .
+iff:state_CLEARING a iff:machineState .
+iff:state_CLEARING iff:stateValidFor iff:cutter .
+iff:state_CLEANING a iff:machineState .
+iff:state_CLEANING iff:stateValidFor iff:filter .
+iff:state_ERROR a iff:machineState .
+iff:state_ERROR iff:stateValidFor iff:filter, iff:cutter .
+
+Question: 
+RDF machine state labels or definitions for IFF namespace from knowledge turtle file.
+
+Answer:
+iff:state_ON rdfs:label "ON" .
+iff:state_OFF rdfs:label "OFF" .
+iff:state_PREPARING rdfs:label "PREPARING" .
+iff:state_PROCESSING rdfs:label "PROCESSING" .
+iff:state_CLEARING rdfs:label "ON" .
+iff:state_ERROR rdfs:label "ERROR" .
+
+Question: 
+Full RDF from knowledge turtle file for IFF namespace.
+
+Answer:
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX iff: <https://industry-fusion.com/types/v0.9/>
+PREFIX oee: <https://industry-fusion.com/oee/v0.9/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+### Test classes
+iff:cutter_test rdfs:subClassOf iff:machine_test ;
+    a iff:class .
+iff:plasmacutter_test rdfs:subClassOf iff:cutter_test ;
+    a iff:class .
+### End of Test Content
+
+iff:entity a iff:class ;
+    a rdfs:class .
+iff:machine a iff:class ; 
+    a rdfs:class .
+iff:filter rdfs:subClassOf iff:machine ;
+    a iff:class .
+iff:plasmacutter rdfs:subClassOf iff:cutter ;
+    a iff:class .
+iff:lasercutter rdfs:subClassOf iff:cutter;
+    a iff:class .
+iff:cutter rdfs:subClassOf iff:machine ;
+    a iff:class .
+iff:workpiece rdfs:subClassOf iff:entity ;
+    a iff:class .
+iff:filterCartridge rdfs:subClassOf iff:entity ;
+    a iff:class .
+
+
+iff:scheduleEntity a iff:class .
+iff:oeeTemplate rdfs:subClassOf iff:scheduleEntity .
+
+### Machine states
+iff:machineState a rdfs:class .
+iff:state_OFF a iff:machineState .
+iff:state_OFF iff:stateValidFor iff:filter, iff:cutter .
+iff:state_ON a iff:machineState  .
+iff:state_ON iff:stateValidFor iff:filter, iff:cutter .
+iff:state_PREPARING a iff:machineState  .
+iff:state_PREPARING iff:stateValidFor iff:cutter .
+iff:state_PROCESSING a iff:machineState  .
+iff:state_PROCESSING iff:stateValidFor iff:cutter .
+iff:state_CLEARING a iff:machineState .
+iff:state_CLEARING iff:stateValidFor iff:cutter .
+iff:state_CLEANING a iff:machineState .
+iff:state_CLEANING iff:stateValidFor iff:filter .
+iff:state_ERROR a iff:machineState .
+iff:state_ERROR iff:stateValidFor iff:filter, iff:cutter .
+
+### OEE definitions: What state defines availability
+iff:state_PROCESSING oee:availability "1" .
+iff:state_PREPARING oee:availability "0" .
+
+# labels for states
+iff:state_ON rdfs:label "ON" .
+iff:state_OFF rdfs:label "OFF" .
+iff:state_PREPARING rdfs:label "PREPARING" .
+iff:state_PROCESSING rdfs:label "PROCESSING" .
+iff:state_CLEARING rdfs:label "ON" .
+iff:state_ERROR rdfs:label "ERROR" .
+
+iff:WC0 a iff:WC .
+iff:WC1 a iff:WC .
+iff:WC2 a iff:WC .
+iff:WC3 a iff:WC .
+iff:higherHazardLevel a owl:TransitiveProperty .
+iff:WC3 iff:higherHazardLevel iff:WC2 .
+iff:WC2 iff:higherHazardLevel iff:WC1 .
+iff:WC1 iff:higherHazardLevel iff:WC0 .
+#iff:WC1 a rdf:Bag .
+iff:WC1 iff:containsMaterialNumber [
+    a rdf:Bag ;
+    rdf:_1 "1.4301" ;
+    rdf:_2 "1.4302" ;
+    rdf:_3 "1.4303" ;
+    rdf:_4 "1.4304" ;
+    rdf:_5 "1.4305" ;
+] .
+iff:WC2 iff:containsMaterialNumber [
+    a rdf:Bag ;
+    rdf:_1 "1.3301" ;
+    rdf:_2 "1.3302" ;
+    rdf:_3 "1.3303" ;
+    rdf:_4 "1.3304" ;
+    rdf:_5 "1.3305" ;
+ ] .
+iff:WC3 iff:containsMaterialNumber [
+    a rdf:Bag ;
+    rdf:_1 "1.5301" ;
+    rdf:_2 "1.5302" ;
+    rdf:_3 "1.5303" ;
+    rdf:_4 "1.5304" ;
+    rdf:_5 "1.5305" ;
+ ] .
+
+# Severity
+iff:severityCritical a iff:severityClass .
+iff:SeverityWarning a iff:severityClass .
+iff:severityCritical iff:severityCode "critical" .
+iff:severityWarning iff:severityCode "warning" .
+
+Question: 
+SHACL schema or rule or shape of machine RDF or knowledge class in IFF namespace.
+
+Answer:
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iff: <https://industry-fusion.com/types/v0.9/> .
+PREFIX ex: <http://example.com/ns#>
+
+
+iff:MachineShape
+    a sh:NodeShape ;
+    sh:targetClass iff:machine ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/state> ;
+        sh:order 1 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:IRI;
+            sh:class iff:machineState;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+.
+
+Question: 
+SHACL schema or rule or shape of cutter machine RDF or knowledge class in IFF namespace.
+
+Answer:
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iff: <https://industry-fusion.com/types/v0.9/> .
+PREFIX ex: <http://example.com/ns#>
+
+iff:CutterShape
+    a sh:NodeShape ;
+    sh:targetClass iff:cutter ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/state> ;
+        sh:order 10 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:IRI;
+            sh:class iff:machineState;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/hasFilter> ;
+        sh:order 20 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasObject> ;
+            sh:class iff:filter ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Relationship> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/hasInWorkpiece> ;
+        sh:order 30 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasObject> ;
+            sh:class iff:workpiece ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Relationship> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/hasOutWorkpiece> ;
+        sh:order 40 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasObject> ;
+            sh:class iff:workpiece ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Relationship> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/oee/v0.9/availabilityState> ;
+        sh:order 50 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+.
+
+Question: 
+SHACL schema or rule or shape of workpiece RDF or knowledge class in IFF namespace.
+
+Answer:
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iff: <https://industry-fusion.com/types/v0.9/> .
+PREFIX ex: <http://example.com/ns#>
+
+iff:WorkpieceShape
+    a sh:NodeShape ;
+    sh:targetClass iff:workpiece ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/material> ;
+        sh:order 1 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal;
+            sh:minLength 6 ;
+            sh:maxLength 7 ;
+            sh:pattern "^1\\.\\d{4,5}" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:datatype <https://industry-fusion.com/types/v0.9/steelGrade>
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://schema.org/depth> ;
+        sh:order 2 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal ;
+            sh:maxInclusive 600.0 ;
+            sh:minExclusive 0.0 ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/qualityCheck> ;
+        sh:order 3 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal ;
+            sh:maxInclusive 1 ;
+            sh:minInclusive 0 ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    .
+
+Question: 
+SHACL schema or rule or shape of filter RDF or knowledge class in IFF namespace.
+
+Answer:
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iff: <https://industry-fusion.com/types/v0.9/> .
+PREFIX ex: <http://example.com/ns#>
+
+iff:FilterShape
+    a sh:NodeShape ;
+    sh:targetClass iff:filter ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/state> ;
+        sh:order 1 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:IRI;
+            sh:class iff:machineState;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/strength> ;
+        sh:order 2 ;
+        sh:nodeKind sh:BlankNode;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal;
+            sh:minInclusive 0.0 ;
+            sh:maxInclusive 1.0 ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/hasCartridge> ;
+        sh:order 3 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasObject> ;
+            sh:class iff:filterCartridge ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Relationship> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+.
+
+Question: 
+SHACL schema or rule or shape of filter catridge RDF or knowledge class in IFF namespace.
+
+Answer:
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iff: <https://industry-fusion.com/types/v0.9/> .
+PREFIX ex: <http://example.com/ns#>
+
+iff:FilterCartridgeShape
+    a sh:NodeShape ;
+    sh:targetClass iff:filterCartridge ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/wasteClass> ;
+        sh:order 1 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:IRI;
+            sh:class iff:WC;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/inUseFrom> ;
+        sh:order 2 ;
+        sh:nodeKind sh:BlankNode;
+        sh:maxCount 1 ;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/inUseUntil> ;
+        sh:order 3 ;
+        sh:nodeKind sh:BlankNode;
+        sh:maxCount 1 ;
+
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    .
+
+Question: 
+SHACL schema or rule or shape with SPARQL for filter strength check for IFF namespace.
+
+Answer:
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iff: <https://industry-fusion.com/types/v0.9/> .
+PREFIX ex: <http://example.com/ns#>
+
+iff:FilterStrengthShape
+    a sh:NodeShape ;
+    sh:targetClass iff:filter ;
+    sh:sparql [
+        a sh:SPARQLConstraints ;
+        sh:message "Check Filter strength as function of workpiece: {?value}" ;
+        sh:select """
+PREFIX iff: <https://industry-fusion.com/types/v0.9/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+
+SELECT ?this ?value
+    where {
+        $this  iff:strength [ <https://uri.etsi.org/ngsi-ld/hasValue> ?strength ] .
+        ?pc  a iff:cutter .
+        ?pc iff:hasFilter [ <https://uri.etsi.org/ngsi-ld/hasObject> $this ] .
+        ?pc  iff:hasInWorkpiece [ <https://uri.etsi.org/ngsi-ld/hasObject> ?wp ] .
+        ?wp schema:depth [ <https://uri.etsi.org/ngsi-ld/hasValue> ?depth ] .
+        ?pc iff:state [<https://uri.etsi.org/ngsi-ld/hasValue> ?pcstate ] .
+        $this iff:state [<https://uri.etsi.org/ngsi-ld/hasValue> ?filterstate ] .
+        BIND(
+            IF(xsd:integer(?depth) > 500 && xsd:float(?strength) < 1.0, \"Filter strength too low, should be 1.0\", 
+                IF(xsd:integer(?depth) > 250 && xsd:float(?strength) < 0.75, \"Filter strength too low, should be at least 0.75\",
+                    IF(xsd:float(?strength) < 0.5, \"Filter strength too low, should be at least 0.5\", \"ok\")
+                )
+            ) as ?value) .
+        FILTER(?pcstate = <https://industry-fusion.com/types/v0.9/state_PROCESSING> && ?filterstate = <https://industry-fusion.com/types/v0.9/state_ON> && ?value != \"ok\") .
+    }
+        """ ;
+    ] .
+
+Question: 
+SHACL schema or rule or shape with SPARQL for state of cutter check for IFF namespace.
+
+Answer:
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iff: <https://industry-fusion.com/types/v0.9/> .
+PREFIX ex: <http://example.com/ns#>
+
+
+iff:StateOnCutterShape
+    a sh:NodeShape ;
+    sh:targetClass iff:cutter ;
+    sh:sparql [
+        a sh:SPARQLConstraints;
+        sh:severity iff:severityCritical ; 
+        sh:message "Cutter running without running filter" ;
+        sh:select """
+PREFIX iff: <https://industry-fusion.com/types/v0.9/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT $this ?v1 ?f ?v2
+    where {
+        $this  iff:state [<https://uri.etsi.org/ngsi-ld/hasValue> ?v1 ] .
+        $this  iff:hasFilter [ <https://uri.etsi.org/ngsi-ld/hasObject> ?f ] .
+        ?f  iff:state [ <https://uri.etsi.org/ngsi-ld/hasValue> ?v2 ] .
+        FILTER(?v1 = <https://industry-fusion.com/types/v0.9/state_PROCESSING> && ?v2 != <https://industry-fusion.com/types/v0.9/state_ON>)
+    }
+        """ ;
+    ] .
+
+
+Question: 
+SHACL schema or rule or shape with SPARQL for state of filter check for IFF namespace.
+
+Answer:
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iff: <https://industry-fusion.com/types/v0.9/> .
+PREFIX ex: <http://example.com/ns#>
+
+iff:StateOnFilterShape
+    a sh:NodeShape ;
+    sh:targetClass iff:filter ;
+    sh:sparql [
+        a sh:SPARQLConstraints;
+        sh:severity iff:severityWarning ;
+        sh:message "Filter running without running assigned machine" ;
+        sh:select """
+PREFIX iff: <https://industry-fusion.com/types/v0.9/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT $this ?v1 ?pc ?v2
+    where {
+        $this  iff:state [ <https://uri.etsi.org/ngsi-ld/hasValue> ?v1 ] .
+        ?pc rdf:type iff:plasmacutter .
+        ?pc iff:hasFilter [ <https://uri.etsi.org/ngsi-ld/hasObject> $this ] .
+        ?pc  iff:state [ <https://uri.etsi.org/ngsi-ld/hasValue> ?v2 ] .
+        FILTER(?v1 = <https://industry-fusion.com/types/v0.9/state_ON> && ?v2 != <https://industry-fusion.com/types/v0.9/state_PROCESSING>)
+    }
+        """ ;
+    ] .
+
+Question: 
+Full SHACL schema or rule or shape with SPARQL for IFF namespace.
+
+Answer:
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iff: <https://industry-fusion.com/types/v0.9/> .
+PREFIX ex: <http://example.com/ns#>
+
+
+iff:MachineShape
+    a sh:NodeShape ;
+    sh:targetClass iff:machine ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/state> ;
+        sh:order 1 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:IRI;
+            sh:class iff:machineState;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+.
+
+
+iff:CutterShape
+    a sh:NodeShape ;
+    sh:targetClass iff:cutter ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/state> ;
+        sh:order 10 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:IRI;
+            sh:class iff:machineState;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/hasFilter> ;
+        sh:order 20 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasObject> ;
+            sh:class iff:filter ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Relationship> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/hasInWorkpiece> ;
+        sh:order 30 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasObject> ;
+            sh:class iff:workpiece ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Relationship> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/hasOutWorkpiece> ;
+        sh:order 40 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasObject> ;
+            sh:class iff:workpiece ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Relationship> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/oee/v0.9/availabilityState> ;
+        sh:order 50 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+    .
+
+
+iff:WorkpieceShape
+    a sh:NodeShape ;
+    sh:targetClass iff:workpiece ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/material> ;
+        sh:order 1 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal;
+            sh:minLength 6 ;
+            sh:maxLength 7 ;
+            sh:pattern "^1\\.\\d{4,5}" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:datatype <https://industry-fusion.com/types/v0.9/steelGrade>
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://schema.org/depth> ;
+        sh:order 2 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal ;
+            sh:maxInclusive 600.0 ;
+            sh:minExclusive 0.0 ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/qualityCheck> ;
+        sh:order 3 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal ;
+            sh:maxInclusive 1 ;
+            sh:minInclusive 0 ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    .
+
+
+iff:FilterShape
+    a sh:NodeShape ;
+    sh:targetClass iff:filter ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/state> ;
+        sh:order 1 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:IRI;
+            sh:class iff:machineState;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/strength> ;
+        sh:order 2 ;
+        sh:nodeKind sh:BlankNode;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal;
+            sh:minInclusive 0.0 ;
+            sh:maxInclusive 1.0 ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/hasCartridge> ;
+        sh:order 3 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasObject> ;
+            sh:class iff:filterCartridge ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Relationship> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    .
+
+iff:FilterCartridgeShape
+    a sh:NodeShape ;
+    sh:targetClass iff:filterCartridge ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/wasteClass> ;
+        sh:order 1 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:IRI;
+            sh:class iff:WC;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/inUseFrom> ;
+        sh:order 2 ;
+        sh:nodeKind sh:BlankNode;
+        sh:maxCount 1 ;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;
+
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/inUseUntil> ;
+        sh:order 3 ;
+        sh:nodeKind sh:BlankNode;
+        sh:maxCount 1 ;
+
+        sh:property [
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+            sh:minCount 1 ;
+        ] ;
+    ] ;
+    .
+
+iff:ScheduleEntityShape
+    a sh:NodeShape ;
+    sh:targetClass iff:scheduleEntity ;
+    sh:property [
+        sh:path <https://industry-fusion.com/types/v0.9/startTime> ;
+        sh:order 1 ;
+        sh:nodeKind sh:BlankNode;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:property [
+
+            sh:path <https://uri.etsi.org/ngsi-ld/hasValue> ;
+            sh:nodeKind sh:Literal;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:path rdf:type ;
+            sh:hasValue <https://uri.etsi.org/ngsi-ld/Property> ;
+        ] ;
+    ] ;

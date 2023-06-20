@@ -1,3 +1,4 @@
+from getpass import getpass
 from langchain import PromptTemplate, LLMChain, OpenAI
 from langchain.llms import GPT4All
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
@@ -5,6 +6,10 @@ from langchain.document_loaders import TextLoader
 from langchain.indexes import VectorstoreIndexCreator
 from langchain.embeddings import HuggingFaceEmbeddings
 import os
+
+#os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+#openAI.api_key = os.getenv("OPENAI_API_KEY").replace("'", "")
+
 
 # add the path to the CV as a PDF
 loader = TextLoader('data.txt')
@@ -19,9 +24,13 @@ index = VectorstoreIndexCreator(embedding= HuggingFaceEmbeddings()).from_loaders
 # # Verbose is required to pass to the callback manager
 # llm = GPT4All(model=local_path, callbacks=callbacks, verbose=True, backend='gptj')
 
-question = str(input("Please enter your question: "))
+from pathlib import Path
+question = Path('new_query_gas.txt').read_text()
+question_1 = str(question)
+print(question_1)
+#question = str(input("Please enter your question: "))
 # perform similarity search and retrieve the context from our documents
-results = index.vectorstore.similarity_search(question, k=2)
+results = index.vectorstore.similarity_search(question_1, k=2)
 # join all context information (top 4) into one string 
 context = "\n".join([document.page_content for document in results])
 # print(f"Retrieving information related to your question...")
@@ -31,10 +40,10 @@ template = """
 Please use the following context to answer questions.
 Context: {context}
 ---
-Question: {question}
+Question: {question_1}
 Answer: Let's think step by step."""
 
-prompt = PromptTemplate(template=template, input_variables=["context", "question"]).partial(context=context)
+prompt = PromptTemplate(template=template, input_variables=["context", "question_1"]).partial(context=context)
 llm = OpenAI(temperature=0)
 llm_chain = LLMChain(prompt=prompt, llm=llm)
 # Print the result
@@ -46,4 +55,4 @@ print("Processing the information with OpenAI...\n")
 # point connected to the CNC cutting system is to be equipped with appropriate sensor technology and 
 # the values are to be documented. Requires specific window 10 -12 bar at inlet. Input pressure 
 # is measured, output pressure is set and output. use the the given context and namespace to write the shacl file.
-print(llm_chain.run(question))
+print(llm_chain.run(question_1))
