@@ -1,58 +1,69 @@
-from getpass import getpass
-from langchain import PromptTemplate, LLMChain, OpenAI
-from langchain.llms import GPT4All
-from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-from langchain.document_loaders import TextLoader
-from langchain.indexes import VectorstoreIndexCreator
-from langchain.embeddings import HuggingFaceEmbeddings
 import os
+import time
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import Chroma
+from langchain.text_splitter import TokenTextSplitter
+from langchain.llms import OpenAI
+from langchain.document_loaders import UnstructuredURLLoader
+from langchain.chains import ConversationalRetrievalChain
+from langchain.prompts import PromptTemplate
+from langchain.memory import ConversationBufferMemory
+from langchain.document_loaders import TextLoader
 
-#os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
-#openAI.api_key = os.getenv("OPENAI_API_KEY").replace("'", "")
+collection_name="knowledgebase"
+persist_directory="./.chroma/index"
+
+os.environ["OPENAI_API_KEY"] = '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'
+
+# urls = [ "https://github.com/IndustryFusion/DigitalTwin/blob/main/semantic-model/shacl2flink/tests/sql-tests/kms-constraints/test1/shacl.ttl",
+#         "https://github.com/IndustryFusion/DigitalTwin/blob/main/semantic-model/shacl2flink/tests/sql-tests/kms-constraints/test2/shacl.ttl",
+#           "https://github.com/IndustryFusion/DigitalTwin/blob/main/semantic-model/shacl2flink/tests/sql-tests/kms-constraints/test5/shacl.ttl",
+#             "https://github.com/IndustryFusion/DigitalTwin/blob/main/semantic-model/kms/shacl.ttl",
+#             "https://github.com/hrabhijith/shacl-playground/blob/langchain-test/data.txt"]
 
 
-# add the path to the CV as a PDF
-loader = TextLoader('data.txt')
-# Embed the document and store into chroma DB
-index = VectorstoreIndexCreator(embedding= HuggingFaceEmbeddings()).from_loaders([loader])
+loader = TextLoader('./data.txt')
+
+# loader = UnstructuredURLLoader(urls=urls)
+kb_data = loader.load()
+
+text_splitter = TokenTextSplitter(chunk_size=1000, chunk_overlap=0)
+kb_doc = text_splitter.split_documents(kb_data)
+
+embeddings = OpenAIEmbeddings()
+kb_db = Chroma.from_documents(kb_doc, embeddings, collection_name=collection_name, persist_directory=persist_directory)
+kb_db.persist()
 
 
-# # specify the path to the .bin downloaded file
-# local_path = './models/ggml-gpt4all-j-v1.3-groovy.bin'  # replace with your desired local file path
-# # Callbacks support token-wise streaming
-# callbacks = [StreamingStdOutCallbackHandler()]
-# # Verbose is required to pass to the callback manager
-# llm = GPT4All(model=local_path, callbacks=callbacks, verbose=True, backend='gptj')
-
-from pathlib import Path
-question = Path('new_query_gas.txt').read_text()
-question_1 = str(question)
-print(question_1)
-#question = str(input("Please enter your question: "))
-# perform similarity search and retrieve the context from our documents
-results = index.vectorstore.similarity_search(question_1, k=2)
-# join all context information (top 4) into one string 
-context = "\n".join([document.page_content for document in results])
-# print(f"Retrieving information related to your question...")
-# print(f"Found this content which is most similar to your question: {context}")
-
-template = """
+prompt_template = """
 Please use the following context to answer questions.
 Context: {context}
 ---
-Question: {question_1}
+Question: {question}
 Answer: Let's think step by step."""
 
-prompt = PromptTemplate(template=template, input_variables=["context", "question_1"]).partial(context=context)
-llm = OpenAI(temperature=0)
-llm_chain = LLMChain(prompt=prompt, llm=llm)
-# Print the result
-print("Processing the information with OpenAI...\n")
+chat_history = []
+memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True, output_key='answer')
+### With an LLM we have the opportunity to give it an identity before a conversation or to define how the question and answer should look like
+PROMPT = PromptTemplate(
+    template=prompt_template, input_variables=["context", "question"]
+)
 
-# E.g, write a shacl ttl file For the cutting process at CNC cutting machines a defined pressure 
-# as well as a given flow rate of gas (or different gases, 
-# depending on the process) has to be kept. To ensure that these parameters are met, the gas sampling
-# point connected to the CNC cutting system is to be equipped with appropriate sensor technology and 
-# the values are to be documented. Requires specific window 10 -12 bar at inlet. Input pressure 
-# is measured, output pressure is set and output. use the the given context and namespace to write the shacl file.
-print(llm_chain.run(question_1))
+qa = ConversationalRetrievalChain.from_llm(
+    llm=OpenAI(model_name="gpt-3.5-turbo"),
+    memory=memory,
+    retriever=kb_db.as_retriever(),
+    combine_docs_chain_kwargs={'prompt': PROMPT}
+)
+
+def chat(question):
+    result = qa({"question": question, "chat_history": chat_history})
+    chat_history.append((question, result["answer"]))
+    return(result["answer"])
+
+if __name__ == "__main__":
+    while True:
+        time.sleep(1)
+        question = str(input("Prompt: "))
+
+        print(chat(question))

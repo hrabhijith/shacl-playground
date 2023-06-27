@@ -1,13 +1,3 @@
-Please assume you are developer which has written below SHACL query for industry-fusion foundation and use it as a template
-to generate new SHACL query for below request:                                                                   
-Proof of gas pressure/flow for cutting process for with below constraints
-Goal:
-For the cutting process on CNC cutting systems, a defined pressure and a specified flow rate of gas (or various gases, depending on the process) must be maintained. In order to ensure that these parameters are adhered to, the gas extraction point, which is connected to the CNC cutting system, 
-is to be equipped with appropriate sensors and the values are to be documented.
-K:
-Requires specific window 10 -12 bar at the entrance. Inlet pressure is measured, outlet pressure is set and output.
-It would be interesting to know whether enough gas is available before starting the cutting process.
-Gas consumption / flow:
-Gas consumption is determined in tests and transferred to the database. During operation, the value is read and set from the database, but no longer measured.
-Pressure in bottles:
-Highly compressed gases, e.g. Ar, correspond to the high pressure of the filling.
+1. Write a SHACL shape for industry-fusion iff namespace. For CNC cutting systems. the  pressure and  flow rate of gas are the properties. The cutting machine is connected to a power source using relationship. IFF namespace always uses nested blanknodes for both properties and relationships to validate json-ld and in complaint with rdflib. Use the context where, a BlankNode properties always have two parameters type and hasValue and relationships always have type and hasObject.
+
+2. Write a SHACL shape according to industry-fusion iff namespace. For CNC cutting systems, the  pressure and  flow rate of gas are the properties. The cutting machine is connected to a power source using relationship. using chat history and context.

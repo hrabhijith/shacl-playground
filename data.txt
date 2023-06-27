@@ -1,5 +1,7 @@
+IFF namespace always uses nested blanknodes for both properties and relationships to validate json-ld and in complaint with rdflib. Use the context where, a BlankNode properties always have two parameters type and hasValue and relationships always have type and hasObject.
+
 Question: 
-Give me the main RDF classes and subclasses for IFF namespace from knowledge turtle file .
+Give me the main RDF classes and subclasses for IFF namespace from knowledge turtle file. 
 
 Answer: 
 PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
@@ -170,7 +172,7 @@ iff:severityCritical iff:severityCode "critical" .
 iff:severityWarning iff:severityCode "warning" .
 
 Question: 
-SHACL schema or rule or shape of machine RDF or knowledge class in IFF namespace.
+SHACL schema or rule or shape of machine RDF or knowledge class in IFF namespace with a BlankNode having two parameters type and hasValue for state property.
 
 Answer:
 @prefix dash: <http://datashapes.org/dash#> .
@@ -208,7 +210,8 @@ iff:MachineShape
 .
 
 Question: 
-SHACL schema or rule or shape of cutter machine RDF or knowledge class in IFF namespace.
+SHACL schema or rule or shape of cutter machine RDF or knowledge class in IFF/industry fusion namespace with BlankNode as property and workpiece in relationship.  with a BlankNode having two parameters type and hasValue for state property and filter relationship.
+
 
 Answer:
 @prefix dash: <http://datashapes.org/dash#> .
@@ -317,7 +320,7 @@ iff:CutterShape
 .
 
 Question: 
-SHACL schema or rule or shape of workpiece RDF or knowledge class in IFF namespace.
+SHACL schema or rule or shape of workpiece RDF or knowledge class in IFF/industry fusion namespace. Nested BlankNode properties.
 
 Answer:
 @prefix dash: <http://datashapes.org/dash#> .
@@ -397,7 +400,7 @@ iff:WorkpieceShape
     .
 
 Question: 
-SHACL schema or rule or shape of filter RDF or knowledge class in IFF namespace.
+SHACL schema or rule or shape of filter RDF or knowledge class in IFF namespace with two blanknode properties strength and status and one relationship with filter catridge.
 
 Answer:
 @prefix dash: <http://datashapes.org/dash#> .
@@ -468,7 +471,7 @@ iff:FilterShape
 .
 
 Question: 
-SHACL schema or rule or shape of filter catridge RDF or knowledge class in IFF namespace.
+SHACL schema or rule or shape of filter catridge RDF or knowledge class in IFF namespace with two blanknode properties wasteClass and inUseFrom and zero relationship.
 
 Answer:
 @prefix dash: <http://datashapes.org/dash#> .
