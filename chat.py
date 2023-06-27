@@ -13,7 +13,7 @@ from langchain.document_loaders import TextLoader
 collection_name="knowledgebase"
 persist_directory="./.chroma/index"
 
-os.environ["OPENAI_API_KEY"] = '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'
+os.environ["OPENAI_API_KEY"] = 'your key here'
 
 # urls = [ "https://github.com/IndustryFusion/DigitalTwin/blob/main/semantic-model/shacl2flink/tests/sql-tests/kms-constraints/test1/shacl.ttl",
 #         "https://github.com/IndustryFusion/DigitalTwin/blob/main/semantic-model/shacl2flink/tests/sql-tests/kms-constraints/test2/shacl.ttl",
